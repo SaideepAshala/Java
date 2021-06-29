@@ -1,0 +1,88 @@
+package vantage;
+
+
+
+
+//package org.vantage.RestfulClient.webservices;
+//Classes for exception processing
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.net.URISyntaxException;
+
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+//Class for HTTP processing
+import java.net.URI;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+import org.json.XML;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import com.artesia.video.VideoData;
+//Main Job Submit class
+public class VantageGet {
+String result = null;
+static String res;
+public static void main(String[] args) throws ClientProtocolException,
+IOException, URISyntaxException {
+	
+	 VideoData vd=new VideoData((float) 20.3);
+	 vd.getFrameRate();
+	 System.out.println("VideoData:"+vd.getFrameRate());
+	 
+	URI uri = new URIBuilder()
+	.setScheme("http")
+	.setHost("dmi-514.digirep.usc.edu:8676")
+	.setPath("/SubmitRest/SubmitFile")
+	.setParameter("workflowIdentifier", "22f2ffa2-e60c-4a2c-a87c-4bed9e4d6396")
+	.setParameter("sourceFilename","C:\\Users\\Saideep Ashala\\Downloads\\sample-ipv.mp4")
+	.setParameter("jobName","FireRequest")
+	.setParameter("DestinationPathFull","")
+	.setParameter("OutputFilename","")
+	.build();
+	
+	 System.out.println("submitJob URI: " + uri);
+	//Execute the job submit method
+	submitJob(uri);
+	 System.out.println(res);
+	}
+	private static String submitJob(URI uri) throws IOException {
+	//String result = null;
+	// create an HTTP client
+	CloseableHttpClient httpClient = HttpClients.createDefault();
+	
+	try { // set up a Post
+	 HttpPost httpget = new HttpPost(uri);
+	 
+	// execute the post
+	 CloseableHttpResponse response = httpClient.execute(httpget); 
+
+	 VideoData vd=new VideoData();
+	 vd.getFrameRate();
+	 
+	 
+	
+	}
+	catch(Exception e) {}
+	//release the connection and return
+	return res;
+	
+	//]httpClient.close();
+	//return res;
+	
+	}
+	
+	}
